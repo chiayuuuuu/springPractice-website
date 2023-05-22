@@ -15,10 +15,12 @@ public class DistrictServiceCrudImplement implements DistrictService {
 	private DistrictBeanRepository repository;
 
 	@Override
-	public List<DistrictBean> getAllDistrict() {
+	public List<DistrictBean> getAllDistrict(String county) {
 		List<DistrictBean> districtBeanList = new ArrayList<>();
 		for (DistrictBean bean : repository.findAll()) {
-			districtBeanList.add(bean);
+			if(bean.getCounty().equals(county)) {
+				districtBeanList.add(bean);				
+			}
 		}
 		return districtBeanList;
 	}

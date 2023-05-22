@@ -15,7 +15,7 @@ public class KaohsiungServiceCrudImplement implements KaohsiungService {
 	private KaohsiungRepository repository;
 
 	@Override
-	public List<Kaohsiung> getAllDistrict() {
+	public List<Kaohsiung> getAllKaohsiung() {
 		List<Kaohsiung> KaohsiungList = new ArrayList<>();
 		for (Kaohsiung bean : repository.findAll()) {
 			KaohsiungList.add(bean);

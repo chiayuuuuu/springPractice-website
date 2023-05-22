@@ -16,9 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ctbcbank.biglab.biglab.bean.AttractionBean;
+import com.ctbcbank.biglab.biglab.bean.Kaohsiung;
+import com.ctbcbank.biglab.biglab.bean.NewTaipei;
 import com.ctbcbank.biglab.biglab.bean.Taipei;
 import com.ctbcbank.biglab.biglab.service.AttractionBeanService;
 import com.ctbcbank.biglab.biglab.service.KaohsiungService;
+import com.ctbcbank.biglab.biglab.service.NewTaipeiService;
 import com.ctbcbank.biglab.biglab.service.TaipeiService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -34,6 +37,8 @@ public class AttractionBeanRestController {
 	@Autowired
 	private TaipeiService taipeiService;
 	@Autowired
+	private NewTaipeiService newTaipeiService;
+	@Autowired
 	private KaohsiungService kaohsiungService;
 
 	@GetMapping("/all")
@@ -46,16 +51,47 @@ public class AttractionBeanRestController {
 		AttractionBean bean = attractionBeanService.getAttractionBeanById(Long.parseLong(ApiId));
 		return new ResponseEntity<>(bean, HttpStatus.OK);
 	}
-	
+
+//	@GetMapping("/{county}/{ApiId}")
+//	public ResponseEntity<?> getAttractionById(@PathVariable String county, @PathVariable String ApiId) {
+////		AttractionBean bean = attractionBeanService.getAttractionBeanById(Long.parseLong(ApiId));
+////		return new ResponseEntity<>(bean, HttpStatus.OK);	
+//		switch (county) {
+//		case "Taipei":
+//			Taipei bean = attractionBeanService.getTaipeiById(Long.parseLong(ApiId));
+//			return new ResponseEntity<>(bean, HttpStatus.OK);	
+//		case "NewTaipei":
+//			NewTaipei bean2 = attractionBeanService.getNewTaipeiById(Long.parseLong(ApiId));
+//			return new ResponseEntity<>(bean2, HttpStatus.OK);	
+//		case "Tainan":
+//			AttractionBean bean3 = attractionBeanService.getAttractionBeanById(Long.parseLong(ApiId));
+//			return new ResponseEntity<>(bean3, HttpStatus.OK);	
+//		case "Kaohsiung":
+//			Kaohsiung bean4 = attractionBeanService.getKaohsiungById(Long.parseLong(ApiId));
+//			return new ResponseEntity<>(bean4, HttpStatus.OK);	
+//		}
+//		return null;
+//	}
+
 	@GetMapping("/all/{county}")
 	public List<?> getAttractionByCounty(@PathVariable String county) {
 //		AttractionBean bean = attractionBeanService.getAttractionBeanByCounty(county);
-		switch(county) {
+		switch (county) {
 		case "Taipei":
 //			List<Taipei> taipeiList = taipeiService.getAllDistrict();
-			log.info("taipei size={}",taipeiService.getAllTaipei().size());
+			log.info("taipei size={}", taipeiService.getAllTaipei().size());
 			return taipeiService.getAllTaipei();
-	}
+		case "NewTaipei":
+			log.info("NewTaipei size={}", newTaipeiService.getAllNewTaipei().size());
+			return newTaipeiService.getAllNewTaipei();
+		case "Tainan":
+			log.info("tainan size={}", attractionBeanService.getAllAttraction().size());
+			return attractionBeanService.getAllAttraction();
+		case "Kaohsiung":
+//			List<Taipei> taipeiList = taipeiService.getAllDistrict();
+			log.info("Kaohsiung size={}", kaohsiungService.getAllKaohsiung().size());
+			return kaohsiungService.getAllKaohsiung();
+		}
 		return null;
 	}
 
