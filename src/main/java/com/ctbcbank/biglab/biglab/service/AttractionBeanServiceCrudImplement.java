@@ -33,11 +33,11 @@ public class AttractionBeanServiceCrudImplement implements AttractionBeanService
 		for(AttractionBean bean : repository.findAll()) {
 			attractionBeanList.add(bean);
 		}
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+//		try {
+//			Thread.sleep(5000);
+//		} catch (InterruptedException e) {
+//			e.printStackTrace();
+//		}
 		return attractionBeanList;
 	}
 
